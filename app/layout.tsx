@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import '@/app/ui/global.css';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Studocu Q&A App",
-  description: "Created by Alena Gnevusheva",
+  title: 'Studocu Q&A App',
+  description: 'Created by Alena Gnevusheva',
   icons: {
-    icon: '/favicon.png', 
+    icon: '/favicon.png',
   },
 };
 
