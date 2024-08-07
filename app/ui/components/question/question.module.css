@@ -1,0 +1,13 @@
+.question {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.question:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.answer {
+  font-size: 16px;
+}

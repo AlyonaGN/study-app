@@ -20,7 +20,6 @@ const Form = ({ inputs, submitHandler }: FormProps) => {
       <button type="submit" disabled={isPending}>
         Update
       </button>
-      {error && <p>{error}</p>}
     </form>
   );
 };
