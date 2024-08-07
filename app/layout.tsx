@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '@/app/ui/global.css';
+import '@/app/styles.css';
+import { Heading, HeadingLevel } from '@/app/ui/components/heading/Heading';
+import { APP_HEADING } from './utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <header>
+          <Heading level={HeadingLevel.One} title={APP_HEADING} />
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
