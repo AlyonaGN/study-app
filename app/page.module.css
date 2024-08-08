@@ -4,27 +4,9 @@
   flex-grow: 1;
 }
 
-.flexItem {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-}
-
-.shadowed {
-  border-radius: 10px;
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.1),
-    0 6px 20px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-}
-
 /* Change the layout direction for tablets and smaller devices */
 @media (max-width: 768px) {
   .main {
     flex-direction: column;
-  }
-
-  .shadowed {
-    margin: 10px;
   }
 }

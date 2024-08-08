@@ -5,3 +5,9 @@ export interface Input {
   type: HTMLInputTypeAttribute;
   placeholder: string;
 }
+
+export interface QuestionAnswerPair {
+  question: string;
+  answer: string;
+  id: string;
+}

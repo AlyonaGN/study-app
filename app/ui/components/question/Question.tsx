@@ -1,19 +1,15 @@
 'use client';
 import styles from '@/app/ui/components/question/question.module.css';
 import { useState } from 'react';
+import { QuestionAnswerPair } from '@/app/ui/components/types';
 
-interface QuestionProps {
-  question: string;
-  answer: string;
-}
-
-export const Question = ({ question, answer }: QuestionProps) => {
+export const Question = ({ question, answer }: QuestionAnswerPair) => {
   const [isShown, setIsShown] = useState(false);
   const onQuestionClick = () => {
     setIsShown((prevState) => !prevState);
   };
   return (
-    <div>
+    <div className={styles.container}>
       <p onClick={onQuestionClick} className={styles.question}>
         {question}
       </p>
