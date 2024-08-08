@@ -1,12 +1,15 @@
 .button {
   /* the color is used for multiple buttons at studocu.com */
   background-color: #3092fa;
-  border-radius: 6px;
+  border-radius: 8px;
   border: none;
   color: white;
-  padding: 7px 15px;
+  padding: 10px 15px;
   font-size: 20px;
-  font-weight: 300;
+  font-weight: 500;
+  max-width: 300px;
+  align-self: center;
+  margin-top: 10px;
 }
 
 .red {
@@ -15,5 +18,5 @@
 
 .button:hover {
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.8;
 }
