@@ -1,10 +1,12 @@
 .container {
   margin-bottom: 10px;
+  border-bottom: 1px lightgrey dashed;
 }
 
 .question {
   font-size: 18px;
   font-weight: 500;
+  line-height: 2;
 }
 
 .question:hover {
@@ -14,4 +16,5 @@
 
 .answer {
   font-size: 16px;
+  line-height: 2;
 }
