@@ -11,7 +11,7 @@ interface FormProps {
   submitHandler: (state: unknown) => void;
 }
 
-const Form = ({ inputs, submitHandler }: FormProps) => {
+export const Form = ({ inputs, submitHandler }: FormProps) => {
   const [error, submitAction, isPending] = useActionState(submitHandler, null);
 
   return (
