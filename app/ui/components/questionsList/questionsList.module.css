@@ -8,4 +8,5 @@
     inset 2px 0 4px rgba(0, 0, 0, 0.1),
     inset -2px 0 4px rgba(255, 255, 255, 0.7);
   border-radius: 8px;
+  width: 100%;
 }
