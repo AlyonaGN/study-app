@@ -15,6 +15,7 @@ export class ApiClient {
 
   // Method to fetch all questions
   async getQuestions(): Promise<QuestionAnswerPair[]> {
+    'use server';
     try {
       const response = await fetch(`${this.baseUrl}/api/questions`, {
         method: 'GET',
@@ -34,6 +35,7 @@ export class ApiClient {
 
   // Method to create a new question
   async createQuestion(question: QuestionAnswerPair): Promise<QuestionAnswerPair> {
+    'use server';
     try {
       const response = await fetch(`${this.baseUrl}/api/questions`, {
         method: 'POST',

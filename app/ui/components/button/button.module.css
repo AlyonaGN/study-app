@@ -24,6 +24,10 @@
   opacity: 0.7;
 }
 
+.button:disabled {
+  border: 2px rgb(62, 57, 57) dashed;
+}
+
 @media (max-width: 900px) {
   .button {
     font-size: 15px;

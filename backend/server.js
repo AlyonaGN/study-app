@@ -12,7 +12,6 @@ let questions = [
     answer: 'Yep!',
     id: '5e6f7g8h',
     date: 1691500800000,
-    userId: '123',
   },
 
   {
@@ -20,7 +19,6 @@ let questions = [
     answer: 'Yes, she did :)',
     id: '1a2b3c4f',
     date: 1691500800000,
-    userId: '123',
   },
 ];
 

@@ -44,3 +44,11 @@
   font-size: 15px;
   line-height: 1.5;
 }
+
+.warning {
+  padding: 5px 10px;
+  background-color: rgb(194, 32, 32);
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}

@@ -1,25 +1,16 @@
 'use server';
 
-import { z } from 'zod';
-import { emptyAnswer, emptyQuestion } from '@/app/ui/utils/errorsTexts';
 import { ANSWER_INPUT_NAME, QUESTION_INPUT_NAME } from '@/app/ui/utils/formTexts';
-import { BASE_URL, buildQuestionandAnswerObject, TAGS } from '@/app/lib/utils';
+import { buildQuestionandAnswerObject, TAGS, validationSchema } from '@/app/lib/utils';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { apiClient } from './API';
+import { apiClient } from '@/app/lib/API';
+import { FromState } from '@/app/ui/components/types';
+import { noEmptyFields } from '@/app/ui/utils/errorsTexts';
 
-const schema = z.object({
-  question: z.string({
-    invalid_type_error: emptyQuestion,
-  }),
-  answer: z.string({
-    invalid_type_error: emptyAnswer,
-  }),
-});
-
-export default async function createQuestion(userId: string, formData: FormData) {
+export default async function createQuestion(prevState: FromState, formData: FormData) {
   // Validate the inputs
-  const validatedFields = schema.safeParse({
+  const validatedFields = validationSchema.safeParse({
     question: formData.get(QUESTION_INPUT_NAME),
     answer: formData.get(ANSWER_INPUT_NAME),
   });
@@ -27,7 +18,7 @@ export default async function createQuestion(userId: string, formData: FormData)
   // Return early if the form data is invalid
   if (!validatedFields.success) {
     return {
-      errors: validatedFields.error.flatten().fieldErrors,
+      message: noEmptyFields,
     };
   }
 
@@ -38,7 +29,6 @@ export default async function createQuestion(userId: string, formData: FormData)
   const newQuestionAndAnswer = buildQuestionandAnswerObject({
     question,
     answer,
-    userId,
   });
 
   // post a new question
