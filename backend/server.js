@@ -25,12 +25,12 @@ let questions = [
 ];
 
 // GET route to fetch all questions
-app.get('/questions', (req, res) => {
+app.get('/api/questions', (req, res) => {
   res.json(questions);
 });
 
 // POST route to create a new question
-app.post('/questions', (req, res) => {
+app.post('/api/questions', (req, res) => {
   const newQuestion = req.body;
   questions.push(newQuestion);
   res.status(201).json({ message: 'Question created successfully', question: newQuestion });

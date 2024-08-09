@@ -6,6 +6,7 @@ import { ANSWER_INPUT_NAME, QUESTION_INPUT_NAME } from '@/app/ui/utils/formTexts
 import { BASE_URL, buildQuestionandAnswerObject, TAGS } from '@/app/lib/utils';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { apiClient } from './API';
 
 const schema = z.object({
   question: z.string({
@@ -39,20 +40,10 @@ export default async function createQuestion(userId: string, formData: FormData)
     answer,
     userId,
   });
-  console.log('here', JSON.stringify(newQuestionAndAnswer));
 
   // post a new question
   try {
-    const response = await fetch(`${BASE_URL}/questions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newQuestionAndAnswer),
-    });
-
-    const data = await response.json();
-    console.log('Created question:', data);
+    apiClient.createQuestion(newQuestionAndAnswer);
     // invalidate the tag for the questions
     revalidateTag(TAGS.Questions);
   } catch (error) {
