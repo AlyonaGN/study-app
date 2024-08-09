@@ -10,4 +10,6 @@ export interface QuestionAnswerPair {
   question: string;
   answer: string;
   id: string;
+  date: number;
+  userId: string;
 }

@@ -1,6 +1,7 @@
 .main {
   display: flex;
   align-items: stretch;
+  justify-content: space-around;
   flex-grow: 1;
 }
 

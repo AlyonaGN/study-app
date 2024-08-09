@@ -3,16 +3,18 @@ import { Button } from '../button/Button';
 import { CREATE_QUESTION_BUTTON } from '@/app/ui/utils/buttonTexts';
 import styles from '@/app/ui/components/form/form.module.css';
 import { Input } from '@/app/ui/components/types';
+import createQuestion from '@/app/lib/actions';
 
 interface FormProps {
   inputs: Array<Input>;
-  submitHandler: (state: unknown) => void;
+  userId: string;
 }
 
-export const Form = ({ inputs, submitHandler }: FormProps) => {
+export const Form = ({ inputs, userId }: FormProps) => {
+  const createNewQuestion = createQuestion.bind(null, userId);
   return (
     <div className={styles.container}>
-      <form className={styles.form}>
+      <form className={styles.form} action={createNewQuestion}>
         {inputs.map((input) => {
           const { type, name, placeholder } = input;
           return (
@@ -25,7 +27,7 @@ export const Form = ({ inputs, submitHandler }: FormProps) => {
           );
         })}
       </form>
-      <Button text={CREATE_QUESTION_BUTTON} />
+      <Button type="submit" text={CREATE_QUESTION_BUTTON} />
     </div>
   );
 };

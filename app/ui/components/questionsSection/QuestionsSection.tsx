@@ -38,7 +38,7 @@ export const QuestionsSection = () => {
       <QuestionsAndAnswersList questionAnswerPairs={tempQuestions} />
       <div className={styles.buttonsContainer}>
         <Button text={SORT_QUESTIONS_BUTTON} />
-        <Button text={REMOVE_QUESTIONS_BUTTON} color={ButtonColor.Red} />
+        <Button text={REMOVE_QUESTIONS_BUTTON} buttonColor={ButtonColor.Red} />
       </div>
     </div>
   );

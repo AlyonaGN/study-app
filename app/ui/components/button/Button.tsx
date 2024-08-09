@@ -1,4 +1,5 @@
 import styles from '@/app/ui/components/button/button.module.css';
+import { ButtonHTMLAttributes } from 'react';
 
 export enum ButtonColor {
   Default,
@@ -10,21 +11,23 @@ export enum ButtonSize {
   XS,
 }
 
-interface ButtonProps {
-  color?: ButtonColor;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  buttonColor?: ButtonColor;
   text: string;
   size?: ButtonSize;
 }
 
 export const Button = ({
-  color = ButtonColor.Default,
+  buttonColor = ButtonColor.Default,
   size = ButtonSize.Default,
   text,
+  ...rest
 }: ButtonProps) => {
   return (
     <button
       type="button"
-      className={`${styles.button} ${color === ButtonColor.Red ? styles.red : ''} ${size === ButtonSize.XS ? styles.xs : ''} `}
+      className={`${styles.button} ${buttonColor === ButtonColor.Red ? styles.red : ''} ${size === ButtonSize.XS ? styles.xs : ''} `}
+      {...rest}
     >
       {text}
     </button>

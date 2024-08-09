@@ -18,7 +18,11 @@ export const Question = ({ question, answer }: QuestionAnswerPair) => {
         </p>
         <div className={styles.buttons}>
           <Button text={EDIT_QUESTION_BUTTON} size={ButtonSize.XS} />
-          <Button text={REMOVE_QUESTION_BUTTON} color={ButtonColor.Red} size={ButtonSize.XS} />
+          <Button
+            text={REMOVE_QUESTION_BUTTON}
+            buttonColor={ButtonColor.Red}
+            size={ButtonSize.XS}
+          />
         </div>
       </div>
 
