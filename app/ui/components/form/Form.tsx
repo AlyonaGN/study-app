@@ -26,8 +26,8 @@ export const Form = ({ inputs, userId }: FormProps) => {
             </div>
           );
         })}
+        <Button type="submit" text={CREATE_QUESTION_BUTTON} />
       </form>
-      <Button type="submit" text={CREATE_QUESTION_BUTTON} />
     </div>
   );
 };

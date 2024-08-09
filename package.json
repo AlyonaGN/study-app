@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start:mockoon": "nodemon",
     "lint": "next lint",
     "format": "prettier --write ."
   },
@@ -18,7 +17,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@mockoon/cli": "^8.4.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

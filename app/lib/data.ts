@@ -1,12 +1,9 @@
 import { QuestionAnswerPair } from '@/app/ui/components/types';
-import { BASE_URL } from '@/app/lib/utils';
+import { BASE_URL, TAGS } from '@/app/lib/utils';
 
-export async function getQuestions() {
+export async function getAllQuestions() {
   try {
-    // Artificially delay a response for seeing a loading state
-
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    return fetch(`${BASE_URL}/api/questions`)
+    return fetch(`${BASE_URL}/questions`, { next: { tags: [TAGS.Questions] } })
       .then((response) => response.json())
       .then((data) => {
         console.log('data', data);

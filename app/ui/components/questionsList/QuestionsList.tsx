@@ -1,10 +1,9 @@
 import styles from '@/app/ui/components/questionsList/questionsList.module.css';
 import { Question } from '@/app/ui/components/question/Question';
-import { getQuestions } from '@/app/lib/data';
+import { getAllQuestions } from '@/app/lib/data';
 
 export const QuestionsAndAnswersList = async () => {
-  const questionAnswerPairs = await getQuestions();
-
+  const questionAnswerPairs = await getAllQuestions();
   return (
     <div className={styles.container}>
       {questionAnswerPairs.map((questionAnswerPair) => {

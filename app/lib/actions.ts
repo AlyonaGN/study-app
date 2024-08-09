@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { emptyAnswer, emptyQuestion } from '@/app/ui/utils/errorsTexts';
 import { ANSWER_INPUT_NAME, QUESTION_INPUT_NAME } from '@/app/ui/utils/formTexts';
-import { buildQuestionandAnswerObject } from '@/app/lib/utils';
+import { BASE_URL, buildQuestionandAnswerObject, TAGS } from '@/app/lib/utils';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -33,28 +33,33 @@ export default async function createQuestion(userId: string, formData: FormData)
   // Cook the data for the database
   const { question, answer } = validatedFields.data;
 
-  // A mock example of how that insertion would look like if I had an SQL DB
-  /*   try {
-    await sql`
-      INSERT INTO questions (question, answer, questionAndAnswerId, userId)
-      VALUES (${question}, ${answer}, ${questionAndAnswerId}, ${userId})
-    `;
-  } catch (error) {
-    // If a database error occurs, return a more specific error.
-    return {
-      message: 'Database Error: Failed to Create Question.',
-    };
-  } */
-
-  // Logic to insert a new question into my mock DB
+  // Build a question&answer obj
   const newQuestionAndAnswer = buildQuestionandAnswerObject({
     question,
     answer,
     userId,
   });
+  console.log('here', JSON.stringify(newQuestionAndAnswer));
 
-  // invalidate the tag for the questions
-  revalidateTag('questions');
-  // redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
-  redirect(`/`);
+  // post a new question
+  try {
+    const response = await fetch(`${BASE_URL}/questions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newQuestionAndAnswer),
+    });
+
+    const data = await response.json();
+    console.log('Created question:', data);
+    // invalidate the tag for the questions
+    revalidateTag(TAGS.Questions);
+  } catch (error) {
+    console.error('Error creating question:', error);
+    throw new Error('Failed to create question.');
+  } finally {
+    // redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
+    redirect(`/`);
+  }
 }

@@ -1,5 +1,0 @@
-{
-  "watch": ["mockoon-environment.json"],
-  "exec": "mockoon-cli start --data mockoon-environment.json  --port 3001",
-  "ext": "json"
-}
