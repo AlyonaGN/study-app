@@ -26,6 +26,11 @@
 
 .button:disabled {
   border: 2px rgb(62, 57, 57) dashed;
+  cursor: wait;
+}
+
+.button:disabled:hover {
+  opacity: 1;
 }
 
 @media (max-width: 900px) {

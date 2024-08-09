@@ -2,8 +2,9 @@
 import styles from '@/app/ui/components/question/question.module.css';
 import { useState } from 'react';
 import { QQPairNoMeta } from '@/app/ui/components/types';
-import { Button, ButtonColor, ButtonSize } from '@/app/ui/components/button/Button';
+import { Button } from '@/app/ui/components/button/Button';
 import { EDIT_QUESTION_BUTTON, REMOVE_QUESTION_BUTTON } from '@/app/ui/utils/buttonTexts';
+import { ButtonColor, ButtonSize } from '../utils';
 
 export const Question = ({ question, answer }: QQPairNoMeta) => {
   const [isShown, setIsShown] = useState(false);

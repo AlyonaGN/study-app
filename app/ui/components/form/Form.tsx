@@ -1,11 +1,13 @@
 'use client';
-import React, { useRef } from 'react';
-import { Button } from '../button/Button';
+import React, { useRef, useState } from 'react';
+import { Button } from '@/app/ui/components/button/Button';
 import { CREATE_QUESTION_BUTTON } from '@/app/ui/utils/buttonTexts';
 import styles from '@/app/ui/components/form/form.module.css';
-import { FromState, Input } from '@/app/ui/components/types';
+import { Input } from '@/app/ui/components/types';
 import createQuestion from '@/app/lib/actions';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
+import { Tooltip } from '../tooltip/Tooltip';
+import { LATENCY_TOOLTIP } from '../../utils/tooltipTexts';
 
 interface FormProps {
   inputs: Array<Input>;
@@ -16,17 +18,18 @@ const initialState = {
 };
 
 export const Form = ({ inputs }: FormProps) => {
-  const [state, formAction] = useFormState(createQuestion, initialState);
-  const { pending } = useFormStatus();
   const ref = useRef<HTMLFormElement>(null);
-  const submitHandler = async (formData: FormData) => {
-    await formAction(formData);
-    ref.current?.reset();
+  const [isLatencyAdded, setIsLatencyAdded] = useState(false);
+  const handleSubmitForm = createQuestion.bind(null, isLatencyAdded);
+  const [state, formAction] = useFormState(handleSubmitForm, initialState);
+
+  const onToggleLatency = () => {
+    setIsLatencyAdded((prevState) => !prevState);
   };
 
   return (
     <div className={styles.container}>
-      <form ref={ref} className={styles.form} action={submitHandler}>
+      <form ref={ref} className={styles.form} action={formAction}>
         {inputs.map((input) => {
           const { type, name, placeholder } = input;
           return (
@@ -39,7 +42,17 @@ export const Form = ({ inputs }: FormProps) => {
           );
         })}
         {state?.message && <p className={styles.warning}>{state.message}</p>}
-        <Button type="submit" text={CREATE_QUESTION_BUTTON} disabled={pending} />
+        <div className={styles.bottomContainer}>
+          <Button type="submit" text={CREATE_QUESTION_BUTTON} />
+          <Tooltip text={LATENCY_TOOLTIP}>
+            <input
+              checked={isLatencyAdded}
+              className={styles.checkbox}
+              type="checkbox"
+              onChange={onToggleLatency}
+            />
+          </Tooltip>
+        </div>
       </form>
     </div>
   );

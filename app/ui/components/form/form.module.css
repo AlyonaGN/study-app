@@ -52,3 +52,37 @@
   border-radius: 10px;
   margin-bottom: 10px;
 }
+
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  align-content: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 2px dashed rgb(16, 92, 16);
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+}
+
+.checkbox::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  background-color: green;
+  position: absolute;
+  transform: translate(15%, -50%) scale(0);
+}
+
+.checkbox:checked::before {
+  transform: scale(1);
+  transform: translate(15%, -50%) scale(1);
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: space-around;
+}
