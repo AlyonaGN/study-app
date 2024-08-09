@@ -7,35 +7,13 @@ import { REMOVE_QUESTIONS_BUTTON, SORT_QUESTIONS_BUTTON } from '@/app/ui/utils/b
 import { Tooltip } from '@/app/ui/components/tooltip/Tooltip';
 import { CREATED_QUESTIONS_TOOLTIP } from '@/app/ui/utils/tooltipTexts';
 
-const tempQuestions = [
-  { question: 'Did Alena meet all requirements?', answer: 'Yes, she did!', id: '1' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-  { question: 'Did Alena go extra miles?', answer: 'Yep!', id: '2' },
-];
-
 export const QuestionsSection = () => {
   return (
     <div className={styles.container}>
       <Tooltip text={CREATED_QUESTIONS_TOOLTIP}>
         <Heading level={HeadingLevel.Two} title={CREATED_QUESTIONS_HEADING} />
       </Tooltip>
-      <QuestionsAndAnswersList questionAnswerPairs={tempQuestions} />
+      <QuestionsAndAnswersList />
       <div className={styles.buttonsContainer}>
         <Button text={SORT_QUESTIONS_BUTTON} />
         <Button text={REMOVE_QUESTIONS_BUTTON} buttonColor={ButtonColor.Red} />

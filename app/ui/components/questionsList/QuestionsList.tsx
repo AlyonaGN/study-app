@@ -1,16 +1,14 @@
 import styles from '@/app/ui/components/questionsList/questionsList.module.css';
-import { QuestionAnswerPair } from '@/app/ui/components/types';
 import { Question } from '@/app/ui/components/question/Question';
+import { getQuestions } from '@/app/lib/data';
 
-interface QuestionsAndAnswersListProps {
-  questionAnswerPairs: Array<QuestionAnswerPair>;
-}
+export const QuestionsAndAnswersList = async () => {
+  const questionAnswerPairs = await getQuestions();
 
-export const QuestionsAndAnswersList = ({ questionAnswerPairs }: QuestionsAndAnswersListProps) => {
   return (
     <div className={styles.container}>
       {questionAnswerPairs.map((questionAnswerPair) => {
-        const { id, question, answer } = questionAnswerPair;
+        const { question, answer, id } = questionAnswerPair;
         return <Question key={id} question={question} answer={answer} id={id} />;
       })}
     </div>

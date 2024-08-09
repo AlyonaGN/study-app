@@ -13,3 +13,5 @@ export interface QuestionAnswerPair {
   date: number;
   userId: string;
 }
+
+export type QQPairNoMeta = Omit<QuestionAnswerPair, 'date' | 'userId'>;
