@@ -1,0 +1,78 @@
+{
+  "uuid": "96ee65fd-bb10-4cc6-8449-7f9b95ace5e6",
+  "lastMigration": 32,
+  "name": "Mock API",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "5dd35495-9df2-4600-99d6-30de155dd696",
+      "type": "http",
+      "documentation": "Get questions",
+      "method": "get",
+      "endpoint": "/api/questions",
+      "responses": [
+        {
+          "uuid": "c6ce93d0-ed13-402e-965b-3c76debb81b2",
+          "body": "[\n  {\n    \"question\": \"Did Alena meet the requirements?\",\n    \"answer\": \"Yes, she did!\",\n    \"id\": \"1a2b3c4d\",\n    \"date\": 1691500800000,\n    \"userId\": \"123\"\n  },\n  {\n    \"question\": \"Did Alena go extra miles?\",\n    \"answer\": \"Yep!\",\n    \"id\": \"5e6f7g8h\",\n    \"date\": 1691500800000,\n    \"userId\": \"123\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": true,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

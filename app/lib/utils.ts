@@ -16,3 +16,9 @@ export const buildQuestionandAnswerObject = (
     date: Date.now(),
   };
 };
+
+export const BASE_URL = 'http://localhost:3001';
+
+export const TAGS = {
+  Questions: 'questions',
+};

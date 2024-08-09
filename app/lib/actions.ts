@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { emptyAnswer, emptyQuestion } from '@/app/ui/utils/errorsTexts';
 import { ANSWER_INPUT_NAME, QUESTION_INPUT_NAME } from '@/app/ui/utils/formTexts';
 import { buildQuestionandAnswerObject } from '@/app/lib/utils';
-import { MOCK_DB_QUESTIONS } from '@/app/lib/mockDB';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -53,8 +52,6 @@ export default async function createQuestion(userId: string, formData: FormData)
     answer,
     userId,
   });
-
-  MOCK_DB_QUESTIONS.push(newQuestionAndAnswer);
 
   // invalidate the tag for the questions
   revalidateTag('questions');
