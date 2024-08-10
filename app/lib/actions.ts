@@ -5,13 +5,13 @@ import { buildQuestionandAnswerObject, TAGS, validationSchema } from '@/app/lib/
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { apiClient } from '@/app/lib/API';
-import { FromState } from '@/app/ui/components/types';
+import { FormState } from '@/app/ui/components/types';
 import { noEmptyFields } from '@/app/ui/utils/errorsTexts';
 import { delay } from '@/app/ui/components/utils';
 
 export default async function createQuestion(
   isLatencyAdded: boolean,
-  previousState: FromState,
+  previousState: FormState,
   formData: FormData,
 ) {
   if (isLatencyAdded) {

@@ -8,6 +8,7 @@ import createQuestion from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
 import { Tooltip } from '../tooltip/Tooltip';
 import { LATENCY_TOOLTIP } from '../../utils/tooltipTexts';
+import { FormState } from '@/app/ui/components/types';
 
 interface FormProps {
   inputs: Array<Input>;
@@ -20,7 +21,11 @@ const initialState = {
 export const Form = ({ inputs }: FormProps) => {
   const ref = useRef<HTMLFormElement>(null);
   const [isLatencyAdded, setIsLatencyAdded] = useState(false);
-  const handleSubmitForm = createQuestion.bind(null, isLatencyAdded);
+  const createQuestionWithArgs = createQuestion.bind(null, isLatencyAdded);
+  const handleSubmitForm = (previousState: FormState, formData: FormData) => {
+    ref?.current?.reset();
+    return createQuestionWithArgs(previousState, formData);
+  };
   const [state, formAction] = useFormState(handleSubmitForm, initialState);
 
   const onToggleLatency = () => {

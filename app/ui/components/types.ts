@@ -15,6 +15,6 @@ export interface QuestionAnswerPair {
 
 export type QQPairNoMeta = Omit<QuestionAnswerPair, 'date'>;
 
-export interface FromState {
+export interface FormState {
   message: string;
 }
