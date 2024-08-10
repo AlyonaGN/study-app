@@ -32,6 +32,18 @@ export class ApiClient {
     }
   }
 
+  async getQuestionById(questionId: string): Promise<QuestionAnswerPair> {
+    const response = await fetch(`${this.baseUrl}/api/questions/${questionId}`, {
+      method: 'GET',
+      headers: this.headers,
+      next: { tags: [`${TAGS.Question}:${questionId}`] },
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch question with ID ${questionId}`);
+    }
+    return response.json();
+  }
+
   async createQuestion(question: QuestionAnswerPair): Promise<QuestionAnswerPair> {
     'use server';
     try {
@@ -56,7 +68,6 @@ export class ApiClient {
       method: 'DELETE',
     });
     if (!response.ok) {
-      console.log('response', response);
       throw new Error('Failed to delete all questions');
     }
   }
@@ -68,6 +79,21 @@ export class ApiClient {
     if (!response.ok) {
       throw new Error(`Failed to delete question with ID ${questionId}`);
     }
+  }
+
+  async updateQuestion(
+    questionId: string,
+    updatedQuestion: QuestionAnswerPair,
+  ): Promise<QuestionAnswerPair> {
+    const response = await fetch(`${this.baseUrl}/api/questions/${questionId}`, {
+      method: 'PUT',
+      headers: this.headers,
+      body: JSON.stringify(updatedQuestion),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to update question with ID ${questionId}`);
+    }
+    return response.json();
   }
 }
 

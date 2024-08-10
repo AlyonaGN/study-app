@@ -4,6 +4,7 @@ export interface Input {
   name: string;
   type: HTMLInputTypeAttribute;
   placeholder: string;
+  defaultValue?: string | number;
 }
 
 export interface QuestionAnswerPair {

@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import { emptyAnswer, emptyQuestion } from '@/app/ui/utils/errorsTexts';
+import { emptyAnswer, emptyQuestion, noEmptyFields } from '@/app/ui/utils/errorsTexts';
 import { QuestionAnswerPair } from '@/app/ui/components/types';
 import { v4 as uuidv4 } from 'uuid';
+import { ANSWER_INPUT_NAME, QUESTION_INPUT_NAME } from '../ui/utils/formTexts';
 
 interface QuestionAndAnswerBuilderProps {
   question: string;
@@ -22,6 +23,7 @@ export const BASE_URL = 'http://localhost:3001';
 
 export const TAGS = {
   Questions: 'questions',
+  Question: 'question',
 };
 
 export const validationSchema = z.object({
@@ -36,3 +38,24 @@ export const validationSchema = z.object({
     })
     .min(1),
 });
+
+export const validateQuestionForm = (formData: FormData) => {
+  const validatedFields = validationSchema.safeParse({
+    question: formData.get(QUESTION_INPUT_NAME),
+    answer: formData.get(ANSWER_INPUT_NAME),
+  });
+
+  return validatedFields;
+};
+
+export const buildEditedQuestionAndAnswer = (
+  previousObj: QuestionAnswerPair,
+  newQuestion: string,
+  newAnswer: string,
+): QuestionAnswerPair => {
+  return {
+    ...previousObj,
+    question: newQuestion,
+    answer: newAnswer,
+  };
+};

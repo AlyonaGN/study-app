@@ -1,11 +1,17 @@
 'use server';
 
 import { ANSWER_INPUT_NAME, QUESTION_INPUT_NAME } from '@/app/ui/utils/formTexts';
-import { buildQuestionandAnswerObject, TAGS, validationSchema } from '@/app/lib/utils';
+import {
+  buildEditedQuestionAndAnswer,
+  buildQuestionandAnswerObject,
+  TAGS,
+  validateQuestionForm,
+  validationSchema,
+} from '@/app/lib/utils';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { apiClient } from '@/app/lib/API';
-import { FormState } from '@/app/ui/components/types';
+import { FormState, QuestionAnswerPair } from '@/app/ui/components/types';
 import { noEmptyFields } from '@/app/ui/utils/errorsTexts';
 import { delay } from '@/app/ui/components/utils';
 
@@ -18,19 +24,13 @@ export default async function createQuestion(
     await delay(5000);
   }
   // Validate the inputs
-  const validatedFields = validationSchema.safeParse({
-    question: formData.get(QUESTION_INPUT_NAME),
-    answer: formData.get(ANSWER_INPUT_NAME),
-  });
-
+  const validatedFields = validateQuestionForm(formData);
   // Return early if the form data is invalid
   if (!validatedFields.success) {
     return {
       message: noEmptyFields,
     };
   }
-
-  // Cook the data for the database
   const { question, answer } = validatedFields.data;
 
   // Build a question&answer obj
@@ -79,6 +79,33 @@ export async function removeQuestionById(questionId: string) {
     throw new Error('Failed to remove question.');
   } finally {
     // Redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
+    redirect(`/`);
+  }
+}
+
+export async function editQuestion(
+  existingQuestion: QuestionAnswerPair,
+  previousState: FormState,
+  formData: FormData,
+) {
+  try {
+    // Validate the inputs
+    const validatedFields = validateQuestionForm(formData);
+    // Return early if the form data is invalid
+    if (!validatedFields.success) {
+      return {
+        message: noEmptyFields,
+      };
+    }
+    const { question, answer } = validatedFields.data;
+    const updatedQuestion = buildEditedQuestionAndAnswer(existingQuestion, question, answer);
+    await apiClient.updateQuestion(existingQuestion.id, updatedQuestion);
+    revalidateTag(TAGS.Questions);
+    revalidateTag(`${TAGS.Question}:${existingQuestion.id}`);
+  } catch (error) {
+    console.error('Error updating question:', error);
+    throw new Error('Failed to update question.');
+  } finally {
     redirect(`/`);
   }
 }
