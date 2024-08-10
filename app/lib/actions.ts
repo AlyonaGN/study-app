@@ -41,7 +41,7 @@ export default async function createQuestion(
 
   // post a new question
   try {
-    apiClient.createQuestion(newQuestionAndAnswer);
+    await apiClient.createQuestion(newQuestionAndAnswer);
     // invalidate the tag for the questions
     revalidateTag(TAGS.Questions);
   } catch (error) {
@@ -49,6 +49,36 @@ export default async function createQuestion(
     throw new Error('Failed to create question.');
   } finally {
     // redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
+    redirect(`/`);
+  }
+}
+
+export async function removeAllQuestions() {
+  try {
+    // Call the API to delete all questions
+    await apiClient.deleteAllQuestions();
+    // Invalidate the tag for the questions
+    revalidateTag(TAGS.Questions);
+  } catch (error) {
+    console.error('Error removing all questions:', error);
+    throw new Error('Failed to remove all questions.');
+  } finally {
+    // Redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
+    redirect(`/`);
+  }
+}
+
+export async function removeQuestionById(questionId: string) {
+  try {
+    // Call the API to delete the question by ID
+    await apiClient.deleteQuestionById(questionId);
+    // Invalidate the tag for the questions
+    revalidateTag(TAGS.Questions);
+  } catch (error) {
+    console.error('Error removing question:', error);
+    throw new Error('Failed to remove question.');
+  } finally {
+    // Redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
     redirect(`/`);
   }
 }

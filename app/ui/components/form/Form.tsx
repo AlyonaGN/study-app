@@ -6,8 +6,8 @@ import styles from '@/app/ui/components/form/form.module.css';
 import { Input } from '@/app/ui/components/types';
 import createQuestion from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
-import { Tooltip } from '../tooltip/Tooltip';
-import { LATENCY_TOOLTIP } from '../../utils/tooltipTexts';
+import { Tooltip } from '@/app/ui/components/tooltip/Tooltip';
+import { LATENCY_TOOLTIP } from '@/app/ui/utils/tooltipTexts';
 import { FormState } from '@/app/ui/components/types';
 
 interface FormProps {
@@ -22,9 +22,11 @@ export const Form = ({ inputs }: FormProps) => {
   const ref = useRef<HTMLFormElement>(null);
   const [isLatencyAdded, setIsLatencyAdded] = useState(false);
   const createQuestionWithArgs = createQuestion.bind(null, isLatencyAdded);
-  const handleSubmitForm = (previousState: FormState, formData: FormData) => {
-    ref?.current?.reset();
-    return createQuestionWithArgs(previousState, formData);
+
+  const handleSubmitForm = async (previousState: FormState, formData: FormData) => {
+    const res = await createQuestionWithArgs(previousState, formData);
+    if (!res?.message) ref?.current?.reset();
+    return res;
   };
   const [state, formAction] = useFormState(handleSubmitForm, initialState);
 

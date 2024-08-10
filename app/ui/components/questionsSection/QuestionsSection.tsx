@@ -1,12 +1,10 @@
 import styles from '@/app/ui/components/questionsSection/questionsSection.module.css';
 import { Heading, HeadingLevel } from '@/app/ui/components/heading/Heading';
 import { CREATED_QUESTIONS_HEADING } from '@/app/ui/utils/headingsTexts';
-import { QuestionsAndAnswersList } from '@/app/ui/components/questionsList/QuestionsList';
-import { Button } from '@/app/ui/components/button/Button';
-import { REMOVE_QUESTIONS_BUTTON, SORT_QUESTIONS_BUTTON } from '@/app/ui/utils/buttonTexts';
+import { QuestionsAndAnswersList } from '@/app/ui/components/questionsSection/questionsList/QuestionsList';
 import { Tooltip } from '@/app/ui/components/tooltip/Tooltip';
 import { CREATED_QUESTIONS_TOOLTIP } from '@/app/ui/utils/tooltipTexts';
-import { ButtonColor } from '../utils';
+import { ButtonsWrapper } from '@/app/ui/components/questionsSection/buttonsWrapper/ButtonsWrapper';
 
 export const QuestionsSection = () => {
   return (
@@ -15,10 +13,7 @@ export const QuestionsSection = () => {
         <Heading level={HeadingLevel.Two} title={CREATED_QUESTIONS_HEADING} />
       </Tooltip>
       <QuestionsAndAnswersList />
-      <div className={styles.buttonsContainer}>
-        <Button text={SORT_QUESTIONS_BUTTON} />
-        <Button text={REMOVE_QUESTIONS_BUTTON} buttonColor={ButtonColor.Red} />
-      </div>
+      <ButtonsWrapper />
     </div>
   );
 };

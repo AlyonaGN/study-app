@@ -13,7 +13,6 @@ export class ApiClient {
     };
   }
 
-  // Method to fetch all questions
   async getQuestions(): Promise<QuestionAnswerPair[]> {
     'use server';
     try {
@@ -33,7 +32,6 @@ export class ApiClient {
     }
   }
 
-  // Method to create a new question
   async createQuestion(question: QuestionAnswerPair): Promise<QuestionAnswerPair> {
     'use server';
     try {
@@ -50,6 +48,25 @@ export class ApiClient {
     } catch (error) {
       console.error('Error creating question:', error);
       throw error;
+    }
+  }
+
+  async deleteAllQuestions(): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/api/questions`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      console.log('response', response);
+      throw new Error('Failed to delete all questions');
+    }
+  }
+
+  async deleteQuestionById(questionId: string): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/api/questions/${questionId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to delete question with ID ${questionId}`);
     }
   }
 }
