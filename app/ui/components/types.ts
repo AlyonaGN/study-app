@@ -20,7 +20,7 @@ export interface FormState {
   message: string;
 }
 
-export const enum SortMode {
+export enum SortMode {
   Alpabetically = 'Alpabetically',
   ByDate = 'ByDate',
 }

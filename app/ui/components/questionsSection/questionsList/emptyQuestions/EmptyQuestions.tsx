@@ -4,7 +4,7 @@ import { NO_QUESTIONS_HEADING, NO_QUESTIONS_SUBHEADING } from '@/app/ui/utils/he
 
 export const EmptyQuestions = () => {
   return (
-    <div className={styles.container}>
+    <div test-id="empty-questions" className={styles.container}>
       <Heading level={HeadingLevel.Two} title={NO_QUESTIONS_HEADING} />
       <Heading level={HeadingLevel.Four} title={NO_QUESTIONS_SUBHEADING} />
     </div>
