@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { emptyAnswer, emptyQuestion, noEmptyFields } from '@/app/ui/utils/errorsTexts';
+import { emptyAnswer, emptyQuestion } from '@/app/ui/utils/errorsTexts';
 import { QuestionAnswerPair } from '@/app/ui/components/types';
 import { v4 as uuidv4 } from 'uuid';
 import { ANSWER_INPUT_NAME, QUESTION_INPUT_NAME } from '../ui/utils/formTexts';

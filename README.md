@@ -27,7 +27,7 @@ Note: Node.js version >= v18.17.0 is required. You can run `sudo n latest` to in
 7. Prettier to improve code formatting
 
 Note:
-I noticed that if you hit the sort button multiple times in a row (~3-4 times), it can cause a buggy behaviour. This is a know bug, plan to take a look into it :)
+I noticed that if you hit the sort button multiple times in a row (~3-4 times), it can cause a buggy behaviour. This is a known bug, plan to take a look into it :)
 
 ## Next Steps
 

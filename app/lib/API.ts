@@ -1,6 +1,5 @@
 import { QuestionAnswerPair, SortMode } from '@/app/ui/components/types';
-import { BASE_URL, BACKEND_ROUTES, TAGS, CLIENT_ROUTES } from '@/app/lib/utils';
-import { redirect } from 'next/navigation';
+import { BASE_URL, BACKEND_ROUTES, TAGS } from '@/app/lib/utils';
 
 export class ApiClient {
   private baseUrl: string;
