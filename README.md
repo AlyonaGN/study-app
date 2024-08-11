@@ -4,15 +4,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Set Up
+
+1. Please go to the root directory and run `npm i`
+2. Then go to the /backend directory and run `npm i`
+3. In the /backend directory run `node server.js `
+4. Open a new terminal and go to the root directory and run rpm run dev
+5. In the browser open http://localhost:3000/'
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
