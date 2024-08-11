@@ -14,12 +14,7 @@ export class ApiClient {
     };
   }
 
-  async getQuestions({
-    sortType,
-  }: {
-    sortType: SortMode;
-    canUseCache?: boolean;
-  }): Promise<QuestionAnswerPair[]> {
+  async getQuestions({ sortType }: { sortType: SortMode }): Promise<QuestionAnswerPair[]> {
     'use server';
     const sorted = sortType === SortMode.Alpabetically ? true : false;
 
@@ -33,7 +28,6 @@ export class ApiClient {
         throw new Error('Failed to fetch questions');
       }
       const data = await response.json();
-      console.log('data', data);
       return data as QuestionAnswerPair[];
     } catch (error) {
       console.error('Error fetching questions:', error);
