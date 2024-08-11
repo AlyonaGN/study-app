@@ -21,6 +21,17 @@ export const buildQuestionandAnswerObject = (
 
 export const BASE_URL = 'http://localhost:3001';
 
+export const BACKEND_ROUTES = {
+  Questions: '/api/questions',
+  SortedQuestions: '/api/questions/sorted',
+  Question: '/api/question',
+};
+
+export const CLIENT_ROUTES = {
+  Main: '/',
+  Question: '/question',
+};
+
 export const TAGS = {
   Questions: 'questions',
   Question: 'question',

@@ -11,3 +11,9 @@ export const enum ButtonSize {
   Default,
   XS,
 }
+
+export const enum QuestionListScenarios {
+  Empty,
+  Sorted,
+  Default,
+}

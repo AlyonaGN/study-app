@@ -19,3 +19,12 @@ export type QQPairNoMeta = Omit<QuestionAnswerPair, 'date'>;
 export interface FormState {
   message: string;
 }
+
+export const enum SortMode {
+  Alpabetically = 'Alpabetically',
+  ByDate = 'ByDate',
+}
+
+export interface SortProps {
+  sort: SortMode;
+}

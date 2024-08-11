@@ -1,14 +1,14 @@
 import styles from '@/app/ui/components/questionsSection/questionsList/questionsList.module.css';
 import { Question } from '@/app/ui/components/question/Question';
+import { EmptyQuestions } from './emptyQuestions/EmptyQuestions';
 import { apiClient } from '@/app/lib/API';
-import { EmptyQuestions } from '../../emptyQuestions/EmptyQuestions';
+import { SortProps } from '../../types';
 
-export const QuestionsAndAnswersList = async () => {
-  const questionAnswerPairs = await apiClient.getQuestions();
+export const QuestionsList = async ({ sort }: SortProps) => {
+  const questionAnswerPairs = await apiClient.getQuestions({ sortType: sort });
   const areQuestionsEmpty = questionAnswerPairs.length === 0;
-  return areQuestionsEmpty ? (
-    <EmptyQuestions />
-  ) : (
+  if (areQuestionsEmpty) return <EmptyQuestions />;
+  return (
     <div className={styles.container}>
       {questionAnswerPairs.map((questionAnswerPair) => {
         const { question, answer, id } = questionAnswerPair;

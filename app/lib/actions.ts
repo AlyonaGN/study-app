@@ -1,12 +1,10 @@
 'use server';
-
-import { ANSWER_INPUT_NAME, QUESTION_INPUT_NAME } from '@/app/ui/utils/formTexts';
 import {
   buildEditedQuestionAndAnswer,
   buildQuestionandAnswerObject,
+  CLIENT_ROUTES,
   TAGS,
   validateQuestionForm,
-  validationSchema,
 } from '@/app/lib/utils';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -49,7 +47,7 @@ export default async function createQuestion(
     throw new Error('Failed to create question.');
   } finally {
     // redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
-    redirect(`/`);
+    redirect(CLIENT_ROUTES.Main);
   }
 }
 
@@ -64,7 +62,7 @@ export async function removeAllQuestions() {
     throw new Error('Failed to remove all questions.');
   } finally {
     // Redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
-    redirect(`/`);
+    redirect(CLIENT_ROUTES.Main);
   }
 }
 
@@ -79,7 +77,7 @@ export async function removeQuestionById(questionId: string) {
     throw new Error('Failed to remove question.');
   } finally {
     // Redirect to the path with questions to see the changes (in a real project, most likely, this would be a different path)
-    redirect(`/`);
+    redirect(CLIENT_ROUTES.Main);
   }
 }
 
@@ -106,6 +104,6 @@ export async function editQuestion(
     console.error('Error updating question:', error);
     throw new Error('Failed to update question.');
   } finally {
-    redirect(`/`);
+    redirect(CLIENT_ROUTES.Main);
   }
 }

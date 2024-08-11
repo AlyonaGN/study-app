@@ -1,4 +1,4 @@
-import styles from '@/app/ui/components/emptyQuestions/emptyQuestions.module.css';
+import styles from '@/app/ui/components/questionsSection/questionsList/emptyQuestions/emptyQuestions.module.css';
 import { Heading, HeadingLevel } from '@/app/ui/components/heading/Heading';
 import { NO_QUESTIONS_HEADING, NO_QUESTIONS_SUBHEADING } from '@/app/ui/utils/headingsTexts';
 

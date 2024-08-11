@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google';
 import '@/app/styles.css';
 import { Heading, HeadingLevel } from '@/app/ui/components/heading/Heading';
 import { APP_HEADING } from '@/app/ui/utils/headingsTexts';
+import styles from './page.module.css';
+import { QuestionForm } from '@/app/ui/components/questionForm/QuestionForm';
+import { PageSection } from './ui/components/pageSection/PageSection';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,7 +28,12 @@ export default function RootLayout({
         <header>
           <Heading level={HeadingLevel.One} title={APP_HEADING} />
         </header>
-        {children}
+        <main className={styles.main}>
+          <PageSection>{children}</PageSection>
+          <PageSection>
+            <QuestionForm />
+          </PageSection>
+        </main>
       </body>
     </html>
   );

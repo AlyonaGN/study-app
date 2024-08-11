@@ -7,7 +7,8 @@ import { EDIT_QUESTION_BUTTON, REMOVE_QUESTION_BUTTON } from '@/app/ui/utils/but
 import { ButtonColor, ButtonSize } from '@/app/ui/components/utils';
 import { REMOVE_QUESTION } from '@/app/ui/utils/promptsTexts';
 import { removeQuestionById } from '@/app/lib/actions';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { CLIENT_ROUTES } from '@/app/lib/utils';
 
 export const Question = ({ question, answer, id }: QQPairNoMeta) => {
   const [isShown, setIsShown] = useState(false);
@@ -19,7 +20,7 @@ export const Question = ({ question, answer, id }: QQPairNoMeta) => {
     removeQuestionById(id);
   };
   const onQuestionEditClick = () => {
-    router.push(`/question/${id}`);
+    router.push(`${CLIENT_ROUTES.Question}/${id}`);
   };
   const onQuestionClick = () => {
     setIsShown((prevState) => !prevState);

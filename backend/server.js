@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const boolParser = require('express-query-boolean');
 const port = 3001;
 
 // Middleware to parse JSON bodies
@@ -13,32 +14,45 @@ app.use(
   }),
 );
 
+app.use(boolParser());
+
 // Mock DB
 let questions = [
-  {
-    question: 'Did Alena go extra miles?',
-    answer: 'Yep!',
-    id: '5e6f7g8h',
-    date: 1691500800000,
-  },
-
   {
     question: 'Did Alena meet the requirements?',
     answer: 'Yes, she did :)',
     id: '1a2b3c4f',
     date: 1691500800000,
   },
+  {
+    question: 'Did Alena go extra miles?',
+    answer: 'Yep!',
+    id: '5e6f7g8h',
+    date: 1691500800001,
+  },
 ];
 
 // GET route to fetch all questions
 app.get('/api/questions', (req, res) => {
-  res.json(questions);
+  const { sorted } = req.query;
+  // alpabetical sorting
+  if (sorted) {
+    const sortedQuestions = [...questions].sort((a, b) => a.question.localeCompare(b.question));
+    questions = sortedQuestions;
+    res.json(sortedQuestions);
+  }
+  // chronological sorting
+  else {
+    const sortedQuestions = [...questions].sort((a, b) => a.date - b.date);
+    questions = sortedQuestions;
+    res.json(questions);
+  }
 });
 
 // GET route to fetch a question by id
-app.get('/api/questions/:id', (req, res) => {
-  const { id } = req.params;
-  const question = questions.find((q) => q.id === id);
+app.get('/api/questions/:questionId', (req, res) => {
+  const { questionId } = req.params;
+  const question = questions.find((q) => q.id === questionId);
 
   if (question) {
     res.status(200).json(question);
@@ -57,8 +71,7 @@ app.post('/api/questions', (req, res) => {
 // DELETE route to remove a question by id
 app.delete('/api/questions/:questionId', (req, res) => {
   const { questionId } = req.params;
-  console.log(id, question);
-  const questionIndex = questions.findIndex((q) => q.id === id);
+  const questionIndex = questions.findIndex((q) => q.id === questionId);
 
   if (questionIndex !== -1) {
     const removedQuestion = questions.splice(questionIndex, 1);
@@ -75,11 +88,11 @@ app.delete('/api/questions', (req, res) => {
 });
 
 // PUT route to update a question by id
-app.put('/api/questions/:id', (req, res) => {
-  const { id } = req.params;
+app.put('/api/questions/:questionId', (req, res) => {
+  const { questionId } = req.params;
   const updatedQuestion = req.body;
 
-  const questionIndex = questions.findIndex((q) => q.id === id);
+  const questionIndex = questions.findIndex((q) => q.id === questionId);
 
   if (questionIndex !== -1) {
     // Update the question

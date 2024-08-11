@@ -1,5 +1,6 @@
-import { QuestionAnswerPair } from '@/app/ui/components/types';
-import { BASE_URL, TAGS } from '@/app/lib/utils';
+import { QuestionAnswerPair, SortMode } from '@/app/ui/components/types';
+import { BASE_URL, BACKEND_ROUTES, TAGS, CLIENT_ROUTES } from '@/app/lib/utils';
+import { redirect } from 'next/navigation';
 
 export class ApiClient {
   private baseUrl: string;
@@ -13,10 +14,17 @@ export class ApiClient {
     };
   }
 
-  async getQuestions(): Promise<QuestionAnswerPair[]> {
+  async getQuestions({
+    sortType,
+  }: {
+    sortType: SortMode;
+    canUseCache?: boolean;
+  }): Promise<QuestionAnswerPair[]> {
     'use server';
+    const sorted = sortType === SortMode.Alpabetically ? true : false;
+
     try {
-      const response = await fetch(`${this.baseUrl}/api/questions`, {
+      const response = await fetch(`${this.baseUrl}${BACKEND_ROUTES.Questions}?sorted=${sorted}`, {
         method: 'GET',
         headers: this.headers,
         next: { tags: [TAGS.Questions] },
@@ -25,6 +33,7 @@ export class ApiClient {
         throw new Error('Failed to fetch questions');
       }
       const data = await response.json();
+      console.log('data', data);
       return data as QuestionAnswerPair[];
     } catch (error) {
       console.error('Error fetching questions:', error);
@@ -33,7 +42,7 @@ export class ApiClient {
   }
 
   async getQuestionById(questionId: string): Promise<QuestionAnswerPair> {
-    const response = await fetch(`${this.baseUrl}/api/questions/${questionId}`, {
+    const response = await fetch(`${this.baseUrl}${BACKEND_ROUTES.Questions}/${questionId}`, {
       method: 'GET',
       headers: this.headers,
       next: { tags: [`${TAGS.Question}:${questionId}`] },
@@ -47,7 +56,7 @@ export class ApiClient {
   async createQuestion(question: QuestionAnswerPair): Promise<QuestionAnswerPair> {
     'use server';
     try {
-      const response = await fetch(`${this.baseUrl}/api/questions`, {
+      const response = await fetch(`${this.baseUrl}${BACKEND_ROUTES.Questions}`, {
         method: 'POST',
         headers: this.headers,
         body: JSON.stringify(question),
@@ -64,7 +73,8 @@ export class ApiClient {
   }
 
   async deleteAllQuestions(): Promise<void> {
-    const response = await fetch(`${this.baseUrl}/api/questions`, {
+    'use server';
+    const response = await fetch(`${this.baseUrl}${BACKEND_ROUTES.Questions}`, {
       method: 'DELETE',
     });
     if (!response.ok) {
@@ -73,7 +83,7 @@ export class ApiClient {
   }
 
   async deleteQuestionById(questionId: string): Promise<void> {
-    const response = await fetch(`${this.baseUrl}/api/questions/${questionId}`, {
+    const response = await fetch(`${this.baseUrl}${BACKEND_ROUTES.Questions}/${questionId}`, {
       method: 'DELETE',
     });
     if (!response.ok) {
@@ -85,7 +95,7 @@ export class ApiClient {
     questionId: string,
     updatedQuestion: QuestionAnswerPair,
   ): Promise<QuestionAnswerPair> {
-    const response = await fetch(`${this.baseUrl}/api/questions/${questionId}`, {
+    const response = await fetch(`${this.baseUrl}${BACKEND_ROUTES.Questions}/${questionId}`, {
       method: 'PUT',
       headers: this.headers,
       body: JSON.stringify(updatedQuestion),
