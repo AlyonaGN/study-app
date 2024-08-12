@@ -26,12 +26,9 @@ Note: Node.js version >= v18.17.0 is required. You can run `sudo n latest` to in
 6. Suspense for loading questions
 7. Prettier to improve code formatting
 
-Note:
-I noticed that if you hit the sort button multiple times in a row (~3-4 times), it can cause a buggy behaviour. This is a known bug, plan to take a look into it :)
-
 ## Next Steps
 
-1. Address the bug mentioned above;
+1. Preserve sorting mode on adding new questions;
 2. Add the error pages;
 3. Introduce the authorization and a concept of a user to connect questions to users and secure routes;
 4. Add more tests: I added just a few unit and e2e tests since I did not have the time to add more, but I would be glad to discuss the testing strategy or even write a few more on our meeting;
