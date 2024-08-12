@@ -13,9 +13,7 @@ export const QuestionsSection = ({ sort }: { sort: SortMode }) => {
       <Tooltip text={CREATED_QUESTIONS_TOOLTIP}>
         <Heading level={HeadingLevel.Two} title={CREATED_QUESTIONS_HEADING} />
       </Tooltip>
-
       {/* on a real project that would be a pretty skeleton */}
-
       <Suspense fallback={<p>Loading feed...</p>}>
         <QuestionsList sort={sort} />
       </Suspense>

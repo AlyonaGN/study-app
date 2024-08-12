@@ -6,6 +6,7 @@ import { APP_HEADING } from '@/app/ui/utils/headingsTexts';
 import styles from './page.module.css';
 import { QuestionForm } from '@/app/ui/components/questionForm/QuestionForm';
 import { PageSection } from './ui/components/pageSection/PageSection';
+import SortProvider from './sortProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,15 +26,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header>
-          <Heading level={HeadingLevel.One} title={APP_HEADING} />
-        </header>
-        <main className={styles.main}>
-          <PageSection>{children}</PageSection>
-          <PageSection>
-            <QuestionForm />
-          </PageSection>
-        </main>
+        <SortProvider>
+          <header>
+            <Heading level={HeadingLevel.One} title={APP_HEADING} />
+          </header>
+          <main className={styles.main}>
+            <PageSection>{children}</PageSection>
+            <PageSection>
+              <QuestionForm />
+            </PageSection>
+          </main>
+        </SortProvider>
       </body>
     </html>
   );
