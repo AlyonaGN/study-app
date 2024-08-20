@@ -11,7 +11,7 @@ import SortProvider from './sortProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Studocu Q&A App',
+  title: 'Study Q&A App',
   description: 'Created by Alena Gnevusheva',
   icons: {
     icon: '/favicon.png',

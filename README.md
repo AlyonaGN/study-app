@@ -1,4 +1,4 @@
-This is Q&A App built with NextJS, React, TS and a lot of passion.
+This is a study app that is built with React, Typescript, and NextJS.
 
 ## Set Up
 
